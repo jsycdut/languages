@@ -1,18 +1,22 @@
+;; practice from https://learnxinyminutes.com/docs/zh-cn/elisp-cn/
 (+ 2 2)
 (+ 2 18)
 (+ 2 (+ 1 5))
+
 (setq my-name "jsy")
-(insert "Hello")
+
+(insert "Hello")Hello
+
 (insert "Hello, I am " my-name)
 
-;; function
 (defun hello () (insert "Hello, I am " my-name))
+
 (hello)
 
 (defun hello (name) (insert "Hello, " name))
 
 (hello my-name)
-Hello, jsy
+
 (switch-to-buffer-other-window "*test*")
 (progn
   (switch-to-buffer-other-window "*test*")
@@ -69,3 +73,13 @@ I am kp.
 
 (setq list-of-names '("Sarah" "Chole" "Mathilde"))
 (hello-to-bonjour)
+
+(defun boldify-names ()
+  (switch-to-buffer-other-window "*test*")
+  (goto-char (point-min))
+  (while (re-search-forward "Bonjour \\(.+\\)!" nil t)
+    (add-text-properties (match-beginning 1)
+                         (match-end 1)
+                         (list 'face 'italic)))
+  (other-window 1))
+(boldify-names)
